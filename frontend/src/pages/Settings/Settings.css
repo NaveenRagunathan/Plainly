@@ -1,0 +1,133 @@
+.settings-page {
+    max-width: 900px;
+}
+
+.settings-section {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+.settings-section h2 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+/* Current Plan */
+.current-plan {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+}
+
+.plan-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.plan-name {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-gray-900);
+    text-transform: capitalize;
+}
+
+.plan-details p {
+    margin: var(--space-1) 0;
+    color: var(--color-gray-600);
+}
+
+/* Plans Grid */
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+}
+
+.plan-card {
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: center;
+    transition: all var(--transition-fast);
+}
+
+.plan-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.plan-card.current {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+.plan-header h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-3);
+}
+
+.plan-price {
+    margin-bottom: var(--space-4);
+}
+
+.plan-price .price {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.plan-price .interval {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-6);
+    text-align: left;
+}
+
+.plan-features li {
+    padding: var(--space-2) 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-700);
+}
+
+.plan-card .btn {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .current-plan {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

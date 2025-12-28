@@ -1,0 +1,104 @@
+.subscribers-page {
+    max-width: 1000px;
+}
+
+.tabs-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+}
+
+.tab-btn {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-gray-600);
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-300);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.tab-btn:hover {
+    color: var(--color-gray-800);
+    border-color: var(--color-gray-400);
+}
+
+.tab-btn.active {
+    color: var(--color-white);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 var(--space-2);
+    margin-left: var(--space-2);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-gray-600);
+    background: var(--color-gray-200);
+    border-radius: 999px;
+}
+
+.search-input {
+    width: 200px;
+}
+
+.subscriber-email {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.subscriber-email:hover {
+    text-decoration: underline;
+}
+
+.tag {
+    display: inline-block;
+    padding: var(--space-1) var(--space-2);
+    margin-right: var(--space-1);
+    font-size: var(--font-size-xs);
+    background: var(--color-gray-200);
+    border-radius: var(--radius-sm);
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    width: 100%;
+    max-width: 400px;
+}
+
+.modal h2 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-6);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
