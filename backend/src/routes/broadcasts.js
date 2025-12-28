@@ -232,7 +232,8 @@ router.post('/:id/send', auth, async (req, res, next) => {
             recipientQuery.currentSequence = null;
         }
 
-        const recipientCount = await Subscriber.countDocuments(recipientQuery);
+        const subscribers = await Subscriber.find(recipientQuery);
+        const recipientCount = subscribers.length;
 
         if (recipientCount === 0) {
             return res.status(400).json({
@@ -257,31 +258,28 @@ router.post('/:id/send', auth, async (req, res, next) => {
             });
         }
 
-        // Mark as sending and queue the job
+        // Send emails synchronously (since Redis is usually not available on free tier)
+        const { sendBroadcast } = await import('../services/emailService.js');
+
         broadcast.status = 'sending';
-        broadcast.sentAt = new Date();
         await broadcast.save();
 
-        // Queue actual email sending
-        try {
-            const { queueBroadcast } = await import('../jobs/queueProcessor.js');
-            await queueBroadcast(broadcast._id.toString());
-        } catch (queueError) {
-            console.warn('Queue not available, sending synchronously:', queueError.message);
-            // Fallback: Send synchronously if Redis not available
-            const { sendBroadcast } = await import('../services/emailService.js');
-            const subscribers = await Subscriber.find(recipientQuery);
-            const results = await sendBroadcast(broadcast, subscribers, req.user);
-            broadcast.status = 'sent';
-            broadcast.stats.sent = results.sent;
-            await broadcast.save();
-        }
+        const results = await sendBroadcast(broadcast, subscribers, req.user);
+
+        // Update broadcast with results
+        broadcast.status = 'sent';
+        broadcast.sentAt = new Date();
+        broadcast.stats.sent = results.sent;
+        await broadcast.save();
+
+        console.log(`✅ Broadcast sent: ${results.sent} emails, ${results.failed} failed`);
 
         res.json({
             success: true,
             data: {
                 broadcast,
-                recipientCount
+                recipientCount: results.sent,
+                failed: results.failed
             }
         });
     } catch (error) {
